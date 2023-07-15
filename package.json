@@ -37,5 +37,15 @@
 		"vite": "^4.4.2",
 		"vitest": "^0.32.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"date-fns": "^2.30.0",
+		"mdsvex": "^0.11.0",
+		"node-html-parser": "^6.1.5",
+		"reading-time": "^1.5.0",
+		"rehype-autolink-headings": "^6.1.1",
+		"rehype-slug": "^5.1.0",
+		"remark-abbr": "^1.4.1",
+		"remark-github": "^11.2.4"
+	}
 }

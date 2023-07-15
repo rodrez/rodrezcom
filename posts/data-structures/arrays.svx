@@ -1,0 +1,10 @@
+---
+title: Arrays are literally everything
+---
+
+
+Here's is a nice array 
+
+```ts
+let arr = [];
+```
