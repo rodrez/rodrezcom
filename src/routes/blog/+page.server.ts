@@ -1,18 +1,15 @@
 import { posts } from '$lib/data/posts';
+import type { PageLoad } from '../$types';
 import { error } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
 
 export const load = (({ params }) => {
-	const { slug } = params;
-
-	// get post with metadata
-	const post = posts.find((post) => slug === post.slug);
-
-	if (!post) {
+	// Paginate to 6 post per page
+	// add prev or next to pagination
+	if (!posts) {
 		throw error(404, 'Post not found');
 	}
 
 	return {
-		post
+		posts
 	};
 }) satisfies PageLoad;
