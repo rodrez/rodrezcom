@@ -1,11 +1,11 @@
 <script lang="ts">
-	// import type {PageLoad} from './$types';
-	export let data;
+    // import type {PageLoad} from './$types';
+    export let data;
 </script>
 
 {#if data.category}
 	<p>Render Category Page</p>
-     {JSON.stringify(data.category, null, 2)}
+     {JSON.stringify(data, null, 2)}
 {:else}
 	<p>Post</p>
 	<pre> 

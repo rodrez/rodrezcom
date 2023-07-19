@@ -1,4 +1,4 @@
-import { posts } from '$lib/data/posts';
+import { posts, categories } from '$lib/data/posts';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
@@ -15,13 +15,19 @@ export const load = (({ params }) => {
 	} else {
 		post = posts.find((post) => slug === post.slug);
 	}
+
+	const validCategory = categories.find((c) => c === splittedSlug[0]);
 	// get post with metadata
+	if (!post && splittedSlug.length === 1 && validCategory) {
+		return { category: validCategory };
+	}
 
 	if (!post) {
-		// throw error(404, 'Post not found');
+		throw error(404, 'Post not found');
 	}
 
 	return {
-		post
+		post,
+		categories
 	};
 }) satisfies PageLoad;

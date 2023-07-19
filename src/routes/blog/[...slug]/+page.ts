@@ -11,10 +11,6 @@ export async function load({ data }: PageLoad) {
 
 	return {
 		post: data.post,
-		// component: component.default,
-		layout: {
-			fullWidth: true
-		},
 		category: data.category
 	};
 }

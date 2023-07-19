@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { parse } from 'node-html-parser';
-import { add, format } from 'date-fns';
+import { format } from 'date-fns';
 import readingTime from 'reading-time';
 
 // Since the post will be rendered server side throw error if browser
@@ -21,6 +21,36 @@ export type Post = {
 	preview: string;
 	readingTime: string;
 };
+
+const getCategories = () => {
+	const filepaths: string[][] = Object.keys(
+		import.meta.glob('/posts/**/**/*.{md,svx}', { eager: true })
+	).map((fp) => {
+		const splittedPath = fp.split('/');
+		return splittedPath.slice(2, splittedPath.length);
+	});
+
+	const categories = new Set();
+
+	// The expected structure for these categories will be always
+	// the part after the posts, since that is the designated category
+	// directory
+	for (let i = 0; i < filepaths.length; i++) {
+		const cat = filepaths[i];
+
+		// If there is 1 or less that means theres no categories
+		if (cat.length <= 1) continue;
+
+		const notFile = cat[1].endsWith('.md') || cat[1].endsWith('.svx');
+		if (notFile) {
+			categories.add(cat[0]);
+		}
+	}
+
+	return Array.from(categories);
+};
+
+export const categories = getCategories();
 
 export const posts: Post[] = Object.entries(
 	import.meta.glob('/posts/**/**/*.{md,svx}', { eager: true })
